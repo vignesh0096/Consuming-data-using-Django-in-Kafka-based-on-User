@@ -11,5 +11,5 @@ def producer1():
         data = json.load(file)
         for datas in data:
             topic = 'location'
-            producer.send(topic,value=datas)
+            producer.send(topic, value=datas)
             time.sleep(0.5)

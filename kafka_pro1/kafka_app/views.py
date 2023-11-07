@@ -25,6 +25,8 @@ class GetInput(CreateAPIView):
             for message in consumer:
                 if message.value['name'] == name:
                     print(message.value)
+                    return Response({'status' : 'success',
+                                     'data': message.value})
 
             return Response({'response_code': status.HTTP_200_OK,
                              'message': "signed in succesfully",
