@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from kafka import KafkaConsumer
 import json
 from .producer import producer1
+from rest_framework import status
 
 
 topic_name = 'location'
@@ -25,11 +26,15 @@ class GetInput(CreateAPIView):
                 if message.value['name'] == name:
                     print(message.value)
 
-            return Response({'status': 'success',
-                             'input': name,
+            return Response({'response_code': status.HTTP_200_OK,
+                             'message': "signed in succesfully",
+                             'status_flag': True,
+                             'status': "success",
+                             'error_details': None,
                              })
-        except:
-            return Response({'status':'Failed'})
+        except Exception as e:
+            return Response({'status':'Failed',
+                             'error_details': str(e)})
         # if serializer_class.is_valid():
         # for message in consumer:
         #     if message.value['name'] == name:
